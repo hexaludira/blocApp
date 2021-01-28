@@ -22,7 +22,32 @@ class _MovieListState extends State<MovieList> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ,
+      appBar: AppBar(
+        title: Text("data"),
+      ),
+      body: StreamBuilder(
+        stream: bloc.allMovies,
+        builder: (context, AsyncSnapshot<ItemModel> snapshot) {
+          if (snapshot.hasData) {
+            return buildList(snapshot);
+          } else if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+          return Center(child: CircularProgressIndicator(),);
+        },
+      ),
+    );
+  }
+
+  Widget buildList (AsyncSnapshot<ItemModel> snapshot) {
+    return GridView.builder(
+      itemCount: snapshot.data.results.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
+      itemBuilder: (BuildContext context, int index) {
+        return GridTile(
+          child: Image.network("https://image.tmdb.org/t/p/w185${snapshot.data.results[index].poster_path}", fit: BoxFit.cover,),
+        );
+      }
     );
   }
 }
