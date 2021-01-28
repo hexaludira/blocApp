@@ -9,7 +9,7 @@ class MovieApiProvider {
 
   Future<ItemModel> fetchMovieList() async {
     print("entered");
-    final response = await client.get("http://api.themoviedb.org/3/movie/popular?api_keys=$_apiKey");
+    final response = await client.get("http://api.themoviedb.org/3/movie/popular?api_key=$_apiKey");
     print (response.body.toString());
 
     if(response.statusCode == 200) {
