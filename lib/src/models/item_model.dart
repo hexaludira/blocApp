@@ -48,7 +48,7 @@ class _Result{
     _vote_count = result['vote_count'];
     _id = result['id'];
     _video = result['video'];
-    _vote_average = result['vote_average'];
+    _vote_average = result['vote_average'].toDouble();
     _title = result['title'];
     _popularity = result['popularity'];
     _poster_path = result['poster_path'];
@@ -67,7 +67,7 @@ class _Result{
   }
 
   //Encapsulation
-  String get release_date => release_date;
+  String get release_date => _release_date;
   String get overview => _overview;
   bool get adult => _adult;
   String get backdrop_path => _backdrop_path;
